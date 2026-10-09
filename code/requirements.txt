@@ -1,0 +1,31 @@
+# DP-FL-IDS dependencies.
+#
+# Lower bounds are what the code needs; the trailing comment on each line
+# records the version actually used to produce the results in results/, so a
+# reviewer reproducing them can pin exactly.
+#
+# INSTALL WITH (two commands):
+#     pip install torch --index-url https://download.pytorch.org/whl/cpu
+#     pip install -r requirements.txt
+#
+# The first command matters. Without it pip fetches the CUDA build of
+# PyTorch — about 2.4 GB — which is useless without an NVIDIA graphics card.
+# The CPU build is around 200 MB and everything here was measured on CPU.
+# On a machine with a working NVIDIA GPU, drop the flag.
+
+# ── core: training, privacy, federation ──────────────────────────────────
+torch>=2.0.0            # used: 2.6.0+cu124
+opacus>=1.4.0           # used: 1.6.0   — DP-SGD engine + RDP accountant
+flwr>=1.5.0             # used: 1.30.0  — federated learning framework
+
+# ── data ─────────────────────────────────────────────────────────────────
+pandas>=2.0.0           # used: 2.3.3
+numpy>=1.24.0           # used: 2.2.6
+pyarrow>=12.0.0         # used: 23.0.1  — required: every dataset file is parquet
+scikit-learn>=1.3.0     # used: 1.7.2   — scaler, metrics, confusion matrix
+scipy>=1.11.0           # used: 1.15.3
+joblib>=1.3.0           # used: 1.5.3   — scaler persistence
+
+# ── figures and console ──────────────────────────────────────────────────
+matplotlib>=3.7.0       # used: 3.9.2
+colorama>=0.4.4         # used: 0.4.4   — required by src/utils/console.py
